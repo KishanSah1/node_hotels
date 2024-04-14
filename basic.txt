@@ -1,0 +1,199 @@
+tut-1 & 2:
+^^^^^^^^^^
+
+
+
+//package.json
+//package-lock.json
+
+npm i express
+npm i nodemon
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+//os library inbuild in nodejs
+user=os.userinfo()
+//fs(file system)
+fs.appendfile('','','')
+
+console.log(fs) or os to get deatails about the various functionalities
+
+// var fs=require('fs');
+// var os=require('os');
+
+// var user=os.userInfo();
+// console.log(user);
+
+// fs.appendFile('greeting.txt','hi'+ user.username +'!',()=>{
+//     console.log('file is created');
+// });
+
+
+only one file is run on the server at a time.
+we can make use of things defined in other files by using const notes=require('notes.js')
+notes.age
+notes.addNumbers
+->we have to add export in the file from where we want to export
+module.exports={
+    age
+}
+
+//lodash = various operation on arrays can be done (very helpful library) npm i lodash
+_.unique(arr)
+
+******************************************************************************************
+tut-3
+
+json
+json string to json object: json.parse(___);
+object to string :json.stringfy(___);
+
+
+//api and endpoints
+api->menu card
+endpoints->items in menu card
+
+localhost refers to our own computer
+
+npm i express
+
+const express = require('express')
+const app = express()
+
+//get method
+
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+app.get('/chicken', function (req, res) {
+    res.send('yes sir i would love to serve you chicken');
+})
+
+app.listen(3000)
+
+
+*********************************************************************************
+tut 4:
+
+mongodb
+database also has its own server
+nodejs server and database server
+
+mongod --version
+
+mongosh ->start the shell
+show dbs
+
+db.users.find();
+db.users.find({age;{$lt:24}})
+db.users.insertOne();
+db.users.updateOne({username:"prince"},{$set:{age:27}})
+db.users.deleteOne({id:2})
+
+post method 
+driver to connect nodejs and mongodb server 
+native driver(mongodb)
+mongoose(mostly used)
+
+**********************************************************************************
+tut:5
+
+models or schema
+
+enum:["","",""] //data which are to entered, it will only accept these data for the field
+
+bodyParser: convert the data comming from the frontend into javascript object.
+
+const bodyParser=require('body-parser');
+app.use(bodyParser.json());
+
+//http response status code
+
+//complete post method to save the data
+app.post('/persons',function(req,res){
+  const data=req.body
+  const newPerson=new Person(data);
+  // newPerson.name=data.name;
+  // newPerson.age=data.age;
+  // newPerson.work=data.work;
+  // newPerson.mobile=data.mobile;
+  // newPerson.email=data.email;
+  // newPerson.address=data.address;
+  // newPerson.salary=data.salary;
+
+  newPerson.save((err,savedPerson)=>{
+    if(err){
+      console.log("error saving person:",err);
+      res.status(500).json({error:"internal server error"});
+    }
+    else{
+      console.log("person saved successfully:",savedPerson);
+      res.status(200).json(savedPerson);
+    }
+  })
+})
+
+
+->nowadays no one uses callback in post method like it was used earlier, it decreases the code readability
+callback function->In JavaScript, a callback function is a function that is passed as an argument to 
+another function and is executed after the completion of that function. Callback functions are commonly
+used in asynchronous operations, such as fetching data from a server or handling user input.
+
+
+//async and await
+
+//try and catch
+
+//CRUD operations:
+create,read,update,delete
+
+***************************************************************************************************
+
+tut-6
+^^^^^^
+
+/person/:workType
+
+passing workType as variable into the methods
+which can take values chef,manager and waiter
+
+//express router:is like a traffic cop,its knowns where to send the clients
+helps us to manage endpoints
+
+//update 
+we use put
+
+router.put('/:id',async (req,res)=>{
+  try{
+    const personId=req.params.id;
+    const updatedData=req.body;
+    const response=await Person.findByIdAndUpdate(personId,updatedData,{
+      new:true,//return the updated document
+      runValidators:true//run mongoose validation
+    });
+    if(!response){
+      return res.status(404).json({error:"data not found"});
+    }
+
+    console.log("data updated");
+    res.status(200).json(response);
+    
+  }catch(err){
+    console.log(err);
+    res.status(500).json({error:"internal server error"});
+  }
+})
+
+//delete
+*************************************************************************************************
+
+tut-7
+^^^^^^
+
+git init
+git status
+git add .
+git add server.js
+
+git ignore:.gitignore
