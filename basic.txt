@@ -197,3 +197,19 @@ git add .
 git add server.js
 
 git ignore:.gitignore
+
+git commit -m "first version of our hotels"
+
+//after coping the repo we can download the node modules by using 
+npm i (it will install all the dependencies present in the package.json)
+
+//after changing
+git add .
+git commit -m "message"
+git push
+
+--------
+git pull: pull the changes present in the web
+
+.env module:manage sensetive information in our application
+npm i dotenv

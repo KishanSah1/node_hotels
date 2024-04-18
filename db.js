@@ -1,6 +1,10 @@
 const mongoose=require('mongoose');
+require('dotenv').config();
 
-const mongoURL='mongodb://127.0.0.1:27017/db';
+
+//const mongoURL='mongodb://127.0.0.1:27017/db';
+const mongoURL=process.env.MONGODB_URL;
+//const mongoURL='mongodb+srv://kishan_sah:123Kishan@cluster0.f6bqvzi.mongodb.net/';
 
 mongoose.connect(mongoURL,{
     useNewUrlParser:true,
