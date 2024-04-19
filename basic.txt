@@ -213,3 +213,10 @@ git pull: pull the changes present in the web
 
 .env module:manage sensetive information in our application
 npm i dotenv
+
+mongodb atlas:to host mongodb on cloud
+
+render:website to host nodejs server
+
+useCreateIndex:true,
+useFindAndModify:false
